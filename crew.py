@@ -10,11 +10,11 @@ from crewai.knowledge.source.text_file_knowledge_source import TextFileKnowledge
 original_showwarning = warnings.showwarning
 # Define a custom filter function.
 def custom_showwarning(message, category, filename, lineno, file=None, line=None):
-    # Filter out pydantic warnings: CrewAI tools use @validator instead of @field_validator.
-    # Also, support for class-based `config` is deprecated, tools should use ConfigDict instead.
-    if '/pydantic/_internal/_config.py' in filename or 'crewai_tools/tools' in filename:
+    # Filter out pydantic warnings: CrewAI tools uses a few features of Pydantic v1
+    # deprecated in Pydantic v2.
+    if '/pydantic/_internal/' in filename or 'crewai_tools/tools' in filename:
         return
-    # Show all other warnings
+    # Show all other warnings.
     original_showwarning(message, category, filename, lineno, file, line)
 # Replace the warning display function.
 warnings.showwarning = custom_showwarning
