@@ -1,5 +1,6 @@
-from dotenv import load_dotenv
-load_dotenv()
+# Enable for Langtrace.
+# from dotenv import load_dotenv
+# load_dotenv()
 
 import sys
 
