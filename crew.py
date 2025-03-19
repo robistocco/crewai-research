@@ -6,12 +6,12 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.knowledge.source.string_knowledge_source import StringKnowledgeSource
 from crewai.knowledge.source.text_file_knowledge_source import TextFileKnowledgeSource
 
-# Save a reference to the original showwarning function.
+# Save a reference to the original 'showwarning' function.
 original_showwarning = warnings.showwarning
 # Define a custom filter function.
 def custom_showwarning(message, category, filename, lineno, file=None, line=None):
     # Filter out pydantic warnings: CrewAI tools use @validator instead of @field_validator.
-    # Also support for class-based `config` is deprecated, use ConfigDict instead.
+    # Also, support for class-based `config` is deprecated, tools should use ConfigDict instead.
     if '/pydantic/_internal/_config.py' in filename or 'crewai_tools/tools' in filename:
         return
     # Show all other warnings
@@ -37,11 +37,11 @@ llama_groq_llm = LLM(
   temperature=0.7
 )
 
-# Instantiate tools
+# Instantiate tools.
 search_tool = SerperDevTool()
 web_rag_tool = WebsiteSearchTool()
 
-# Create knowledge sources
+# Create knowledge sources.
 content = '''
 The users is a software engineer in Google.
 The user has several years of experience and a solid understanding of web tech and software engineering principles.'''
@@ -53,12 +53,12 @@ text_source = TextFileKnowledgeSource(
 )
 
 # If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
+# you can use the @before_kickoff and @after_kickoff decorators.
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
 class ResearchCrew():
-  """Roberto crew"""
+  """Agents crew"""
 
   # Learn more about YAML configuration files here:
   # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
@@ -103,7 +103,7 @@ class ResearchCrew():
 
   @crew
   def crew(self) -> Crew:
-    """Creates the Roberto crew"""
+    """Creates the crew"""
     # To learn how to add knowledge sources to your crew, check out the documentation:
     # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 

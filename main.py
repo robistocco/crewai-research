@@ -6,16 +6,13 @@ import sys
 from datetime import datetime
 from textwrap import dedent
 
-# Must precede any llm module imports
+# Must precede any llm module imports.
 # from langtrace_python_sdk import langtrace
 # langtrace.init(api_key=os.getenv("LANGTRACE_API_KEY"))
 
 from crew import ResearchCrew
 
 if __name__ == "__main__":
-  """
-  Run the crew.
-  """
   topic = input(dedent(""">>> Topic to research: """))
 
   inputs = {
