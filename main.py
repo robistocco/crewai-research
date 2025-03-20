@@ -19,7 +19,7 @@ original_showwarning = warnings.showwarning
 
 
 # To avoid Pydantic deprecation warnings, add before importing CrewAI tools:
-def custom_showwarning(message, category, filename, lineno, file=None, line=None):
+def custom_showwarning(message, category, filename, lineno, file=None, line=None):  # pylint: disable=R0913,R0917
   """ Filter out pydantic warnings.
   CrewAI depends on Pydantic v2 but the "tools" package uses v1 notations that
   have been deprecated, and that triggers many warnings output in stdout.
